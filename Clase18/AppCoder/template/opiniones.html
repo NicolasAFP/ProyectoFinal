@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opiniones</title>
+</head>
+
+<body>
+
+    <h1>Opiniones</h1>
+
+    <!-- Formulario para enviar una nueva opinión -->
+    <form action="{% url 'opiniones' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar opinión</button>
+    </form>
+
+    <hr>
+
+    <!-- Sección para mostrar las opiniones anteriores -->
+    {% if opiniones %}
+    <h2>Opiniones anteriores:</h2>
+    <ul>
+        {% for opinion in opiniones %}
+        <li>{{ opinion.contenido }} - {{ opinion.autor }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No hay opiniones disponibles.</p>
+    {% endif %}
+
+</body>
+
+</html>
